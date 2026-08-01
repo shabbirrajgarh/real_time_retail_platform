@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Conda
+.env
+.venv
+
+# Logs
+*.log
+logs/
+
+# Airflow
+airflow/logs/
+airflow/airflow.db
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+
+# Great Expectations
+great_expectations/uncommitted/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.env
+credentials.json
+service-account.json
