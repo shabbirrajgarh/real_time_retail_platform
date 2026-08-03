@@ -6,7 +6,7 @@ os.environ["hadoop.home.dir"] = r"C:\hadoop"
 os.environ["PATH"] += os.pathsep + r"C:\hadoop\bin"
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, from_json
+from pyspark.sql.functions import col, from_json, to_timestamp
 from pyspark.sql.types import (
     StructType,
     StructField,
@@ -57,9 +57,12 @@ parsed_df = (
     json_df
     .select(from_json(col("json"), schema).alias("data"))
     .select("data.*")
-    .withColumnRenamed("timestamp", "transaction_time")
+    .withColumn(
+        "transaction_time",
+        to_timestamp(col("timestamp"))
+    )
+    .drop("timestamp")
 )
-
 def write_to_postgres(batch_df, batch_id):
     print(f"\n===== BATCH {batch_id} =====")
 

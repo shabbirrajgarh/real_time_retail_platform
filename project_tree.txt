@@ -1,0 +1,53 @@
+Folder PATH listing
+Volume serial number is 0000005A 7C0A:0459
+C:.
+¦   .gitignore
+¦   ARCHITECTURE.md
+¦   docker-compose.yml
+¦   PROJECT_TRACKER.md
+¦   project_tree.txt
+¦   README.md
+¦   REQUIREMENTS_MATRIX.md
+¦   
++---airflow
++---consumer
++---data
++---dbt
++---docs
+¦   +---architecture
+¦   +---deliverables
+¦   +---screenshots
++---governance
+¦   +---catalog
+¦   +---lineage
++---great_expectations
++---infrastructure
+¦   +---kubernetes
+¦   +---terraform
++---monitoring
+¦   +---alerts
+¦   +---dashboards
++---producer
+¦       producer.py
+¦       
++---scripts
++---semantic_layer
++---spark
++---spark_jobs
+¦       stream_consumer.py
+¦       test_kafka.py
+¦       test_spark.py
+¦       test_stream.py
+¦       
++---sql
++---streaming
+¦   +---avro_schemas
+¦   +---kafka
+¦   +---producers
+¦   +---schema_registry
++---superset
++---tests
++---warehouse
+    +---bronze
+    +---gold
+    +---silver
