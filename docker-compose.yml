@@ -43,12 +43,4 @@ services:
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://retail-kafka:9092
-  spark:
-    image: bitnami/spark:4.0
-    container_name: retail-spark
-    ports:
-      - "4040:4040"
-    volumes:
-      - ./:/app
-    working_dir: /app
-    command: tail -f /dev/null
+ 
