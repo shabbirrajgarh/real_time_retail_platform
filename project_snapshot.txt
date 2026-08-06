@@ -1,0 +1,161 @@
+Folder PATH listing
+Volume serial number is 0000008C 7C0A:0459
+C:.
+¦   .gitignore
+¦   ARCHITECTURE.md
+¦   docker-compose.yml
+¦   project_snapshot.txt
+¦   PROJECT_TRACKER.md
+¦   project_tree.txt
+¦   README.md
+¦   REQUIREMENTS_MATRIX.md
+¦   retail_backup.sql
+¦   superset_error.txt
+¦   
++---airflow
++---consumer
++---data
++---dbt
++---docs
+¦   +---architecture
+¦   +---deliverables
+¦   +---screenshots
++---governance
+¦   +---catalog
+¦   +---lineage
++---great_expectations
++---infrastructure
+¦   +---kubernetes
+¦   +---terraform
++---logs
+¦       dbt.log
+¦       
++---monitoring
+¦   +---alerts
+¦   +---dashboards
++---producer
+¦       producer.py
+¦       
++---retail_dbt
+¦   ¦   .gitignore
+¦   ¦   dbt_project.yml
+¦   ¦   README.md
+¦   ¦   
+¦   +---analyses
+¦   ¦       .gitkeep
+¦   ¦       
+¦   +---logs
+¦   ¦       dbt.log
+¦   ¦       
+¦   +---macros
+¦   ¦       .gitkeep
+¦   ¦       
+¦   +---models
+¦   ¦   +---gold
+¦   ¦   ¦       product_sales.sql
+¦   ¦   ¦       
+¦   ¦   +---silver
+¦   ¦           schema.yml
+¦   ¦           stg_transactions.sql
+¦   ¦           
+¦   +---seeds
+¦   ¦       .gitkeep
+¦   ¦       
+¦   +---snapshots
+¦   ¦       .gitkeep
+¦   ¦       
+¦   +---target
+¦   ¦   ¦   catalog.json
+¦   ¦   ¦   graph.gpickle
+¦   ¦   ¦   graph_summary.json
+¦   ¦   ¦   index.html
+¦   ¦   ¦   manifest.json
+¦   ¦   ¦   osi_document.json
+¦   ¦   ¦   partial_parse.msgpack
+¦   ¦   ¦   run_results.json
+¦   ¦   ¦   semantic_manifest.json
+¦   ¦   ¦   
+¦   ¦   +---compiled
+¦   ¦   ¦   +---retail_dbt
+¦   ¦   ¦       +---models
+¦   ¦   ¦           +---example
+¦   ¦   ¦           ¦   ¦   my_first_dbt_model.sql
+¦   ¦   ¦           ¦   ¦   my_second_dbt_model.sql
+¦   ¦   ¦           ¦   ¦   
+¦   ¦   ¦           ¦   +---schema.yml
+¦   ¦   ¦           ¦           not_null_my_first_dbt_model_id.sql
+¦   ¦   ¦           ¦           not_null_my_second_dbt_model_id.sql
+¦   ¦   ¦           ¦           unique_my_first_dbt_model_id.sql
+¦   ¦   ¦           ¦           unique_my_second_dbt_model_id.sql
+¦   ¦   ¦           ¦           
+¦   ¦   ¦           +---gold
+¦   ¦   ¦           ¦       product_sales.sql
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---silver
+¦   ¦   ¦               ¦   stg_transactions.sql
+¦   ¦   ¦               ¦   
+¦   ¦   ¦               +---schema.yml
+¦   ¦   ¦                       not_null_stg_transactions_customer_id.sql
+¦   ¦   ¦                       not_null_stg_transactions_price.sql
+¦   ¦   ¦                       not_null_stg_transactions_product.sql
+¦   ¦   ¦                       not_null_stg_transactions_quantity.sql
+¦   ¦   ¦                       not_null_stg_transactions_transaction_id.sql
+¦   ¦   ¦                       
+¦   ¦   +---run
+¦   ¦       +---retail_dbt
+¦   ¦           +---models
+¦   ¦               +---example
+¦   ¦               ¦   ¦   my_first_dbt_model.sql
+¦   ¦               ¦   ¦   my_second_dbt_model.sql
+¦   ¦               ¦   ¦   
+¦   ¦               ¦   +---schema.yml
+¦   ¦               ¦           not_null_my_first_dbt_model_id.sql
+¦   ¦               ¦           not_null_my_second_dbt_model_id.sql
+¦   ¦               ¦           unique_my_first_dbt_model_id.sql
+¦   ¦               ¦           unique_my_second_dbt_model_id.sql
+¦   ¦               ¦           
+¦   ¦               +---gold
+¦   ¦               ¦       product_sales.sql
+¦   ¦               ¦       
+¦   ¦               +---silver
+¦   ¦                   ¦   stg_transactions.sql
+¦   ¦                   ¦   
+¦   ¦                   +---schema.yml
+¦   ¦                           not_null_stg_transactions_customer_id.sql
+¦   ¦                           not_null_stg_transactions_price.sql
+¦   ¦                           not_null_stg_transactions_product.sql
+¦   ¦                           not_null_stg_transactions_quantity.sql
+¦   ¦                           not_null_stg_transactions_transaction_id.sql
+¦   ¦                           
+¦   +---tests
+¦           .gitkeep
+¦           
++---scripts
++---semantic_layer
++---spark
++---spark_jobs
+¦       stream_consumer.py
+¦       test_kafka.py
+¦       test_spark.py
+¦       test_stream.py
+¦       
++---sql
++---streaming
+¦   +---avro_schemas
+¦   +---kafka
+¦   +---producers
+¦   +---schema_registry
++---superset
+¦       Dockerfile
+¦       
++---superset_config
+¦   ¦   superset_config.py
+¦   ¦   
+¦   +---__pycache__
+¦           superset_config.cpython-310.pyc
+¦           
++---tests
++---warehouse
+    +---bronze
+    +---gold
+    +---silver

@@ -1,0 +1,1 @@
+SECRET_KEY = "RetailPlatform2026_SuperSecureSecretKey_ChangeMe123"
