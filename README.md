@@ -1,756 +1,362 @@
-\# 🛒 Real-Time Retail Analytics Platform
+# 🛒 Real-Time Retail Analytics Platform
 
+## End-to-End Data Engineering & Analytics Project
 
+**Apache Kafka → Apache Spark Structured Streaming → PostgreSQL → dbt → Streamlit**
 
-\### End-to-End Data Engineering \& Analytics Project
+---
 
+## 📌 Project Summary
 
+This project implements a complete real-time retail analytics pipeline that simulates retail transactions, streams them through Kafka, processes them using Apache Spark Structured Streaming, stores them in PostgreSQL, transforms them using dbt, and visualizes business insights through an interactive Streamlit dashboard.
 
-\*\*Apache Kafka → Apache Spark Structured Streaming → PostgreSQL → dbt → Streamlit\*\*
+The project was developed as part of a Data Analytics / Data Engineering internship and demonstrates modern data engineering practices including:
 
+- Real-time data ingestion
+- Stream processing
+- Data warehousing
+- Data modeling with dbt
+- Query optimization
+- Data quality validation
+- Database security controls
+- Interactive business intelligence dashboards
 
+---
 
-\---
+## 🎯 Internship Deliverables Status
 
+| Deliverable | Status |
+|------------|---------|
+| Real-Time Data Pipeline | ✅ Completed |
+| PostgreSQL Data Warehouse | ✅ Completed |
+| dbt Transformation Models | ✅ Completed |
+| Streamlit Dashboard | ✅ Completed |
+| Query Optimization Report | ✅ Completed |
+| Data Quality Validation | ✅ Completed |
+| Security Demonstration | ✅ Completed |
+| Project Documentation | ✅ Completed |
 
+---
 
-\## 📌 Project Overview
-
-
-
-The Real-Time Retail Analytics Platform is an end-to-end streaming analytics solution that simulates retail transactions, processes them in real time, stores them in a centralized data warehouse, transforms them into analytical datasets, and presents actionable business insights through an interactive dashboard.
-
-
-
-The project demonstrates modern data engineering concepts including real-time ingestion, stream processing, data warehousing, analytical modeling, query optimization, data quality validation, security implementation, and business intelligence reporting.
-
-
-
-\---
-
-
-
-\## 🎯 Project Objectives
-
-
-
-\* Build a real-time streaming data pipeline.
-
-\* Store and manage transactional data in a warehouse.
-
-\* Transform raw data into analytics-ready datasets.
-
-\* Monitor business KPIs through dashboards.
-
-\* Implement data quality validation.
-
-\* Demonstrate database security controls.
-
-\* Optimize analytical query performance.
-
-
-
-\---
-
-
-
-\## 🏗️ System Architecture
-
-
+## 🏗️ Architecture
 
 ```text
-
 Retail Transaction Producer
-
-&#x20;           │
-
-&#x20;           ▼
-
-&#x20;     Apache Kafka
-
-&#x20;           │
-
-&#x20;           ▼
-
-&#x20;Apache Spark Streaming
-
-&#x20;           │
-
-&#x20;           ▼
-
-&#x20;      PostgreSQL
-
-&#x20;     Data Warehouse
-
-&#x20;           │
-
-&#x20;           ▼
-
-&#x20;           dbt
-
-&#x20;    Transformation Layer
-
-&#x20;           │
-
-&#x20;           ▼
-
-&#x20;   Streamlit Dashboard
-
+            │
+            ▼
+      Apache Kafka
+            │
+            ▼
+Apache Spark Streaming
+            │
+            ▼
+       PostgreSQL
+      Data Warehouse
+            │
+            ▼
+            dbt
+    Transformation Layer
+            │
+            ▼
+   Streamlit Dashboard
 ```
 
+---
 
+## ⚙️ Technology Stack
 
-\---
+| Layer | Technology |
+|---------|------------|
+| Programming Language | Python |
+| Streaming Platform | Apache Kafka |
+| Stream Processing | Apache Spark Structured Streaming |
+| Data Warehouse | PostgreSQL |
+| Data Transformation | dbt |
+| Dashboard | Streamlit |
+| Data Quality | Custom Validation Framework |
+| Query Optimization | PostgreSQL Indexing |
+| Version Control | Git & GitHub |
 
+---
 
+# 🚀 Core Features
 
-\## ⚙️ Technology Stack
+## Real-Time Streaming Pipeline
 
+- Python transaction producer
+- Kafka event streaming
+- Spark Structured Streaming consumer
+- Near real-time ingestion into PostgreSQL
 
+## Data Warehouse
 
-| Component                 | Technology                        |
+Centralized PostgreSQL warehouse storing:
 
-| ------------------------- | --------------------------------- |
+- Transaction data
+- Product data
+- Revenue data
+- Historical analytics data
 
-| Programming Language      | Python                            |
+## dbt Transformation Layer
 
-| Message Broker            | Apache Kafka                      |
+### Silver Layer
 
-| Stream Processing         | Apache Spark Structured Streaming |
+- `stg_transactions`
 
-| Data Warehouse            | PostgreSQL                        |
+### Gold Layer
 
-| Data Transformation       | dbt                               |
+- `product_sales`
+- `daily_sales`
+- `product_performance`
 
-| Dashboard \& Visualization | Streamlit                         |
+## Interactive Dashboard
 
-| Data Validation           | Custom Quality Checks             |
+The Streamlit dashboard provides:
 
-| Query Optimization        | PostgreSQL Indexing               |
+- Real-time KPIs
+- Revenue monitoring
+- Product performance analytics
+- Revenue trends
+- Top-selling products
+- Live transaction feed
 
-| Version Control           | Git \& GitHub                      |
+## Data Quality Validation
 
+Implemented validation checks:
 
+- transaction_id_not_null
+- customer_id_not_null
+- quantity_positive
+- price_positive
+- valid_products
 
-\---
+## Query Optimization
 
+Performance improvements achieved using:
 
+- Product indexing
+- Time-based indexing
+- Execution plan analysis
+- EXPLAIN ANALYZE benchmarking
 
-\## 🚀 Key Features
+## Security Demonstration
 
+Role-based database access:
 
+- Regional Manager
+- National Manager
 
-\### Real-Time Streaming Pipeline
+---
 
+# 📸 Project Evidence
 
+## dbt DAG
 
-\* Retail transaction generator using Python.
+![dbt DAG](docs/screenshots/dbt_dag.png)
 
-\* Kafka producer for event streaming.
+---
 
-\* Spark Structured Streaming consumer.
+## Data Models
 
-\* Near real-time ingestion into PostgreSQL.
+### Staging Model
 
+![Staging Model](docs/screenshots/stg_transactions_model.png)
 
+### Product Sales Model
 
-\### Data Warehouse
+![Product Sales Model](docs/screenshots/product_sales_model.png)
 
+### Daily Sales Model
 
+![Daily Sales Model](docs/screenshots/daily_sales_model.png)
 
-\* Centralized PostgreSQL warehouse.
+### Product Performance Model
 
-\* Historical transaction storage.
+![Product Performance Model](docs/screenshots/product_performance_model.png)
 
-\* Structured schema for analytical workloads.
+---
 
+## Dashboard Screenshots
 
+### Dashboard Overview
 
-\### dbt Transformation Layer
+![Dashboard Overview](docs/screenshots/dashboard_overview.png.png)
 
+### Product Analytics
 
+![Product Analytics](docs/screenshots/dashboard_product_analytics.png.png)
 
-The project implements a layered transformation architecture:
+### Product Analytics (Additional View)
 
+![Product Analytics 2](docs/screenshots/dashboard_product_analytics.png%20(2).png)
 
+### Live Transaction Feed
 
-\#### Silver Layer
+![Live Feed](docs/screenshots/dashboard_live_feed.png.png)
 
+---
 
+## Query Optimization Evidence
 
-\* `stg\_transactions`
+### Product Query Before Optimization
 
+![Before Optimization](docs/screenshots/query_optimization_product_before.png)
 
+### Product Query After Optimization
 
-\#### Gold Layer
+![After Optimization](docs/screenshots/query_optimization_product_after.png)
 
+### Time-Based Query Optimization
 
+![Time Optimization](docs/screenshots/query_optimization_product_time.png)
 
-\* `product\_sales`
+### Recent Transactions Query
 
-\* `daily\_sales`
+![Recent Transactions](docs/screenshots/query_optimization_recent_transactions.png)
 
-\* `product\_performance`
+### Revenue Aggregation Query
 
+![Revenue Query](docs/screenshots/query_optimization_revenue.png)
 
+---
 
-\### Business Intelligence Dashboard
-
-
-
-Interactive Streamlit dashboard featuring:
-
-
-
-\* Live KPI monitoring
-
-\* Revenue tracking
-
-\* Product performance analytics
-
-\* Revenue trend analysis
-
-\* Product-wise sales analysis
-
-\* Live transaction feed
-
-
-
-\### Data Quality Validation
-
-
-
-Automated checks include:
-
-
-
-\* Transaction ID not null
-
-\* Customer ID not null
-
-\* Quantity greater than zero
-
-\* Price greater than zero
-
-\* Valid product values
-
-
-
-\### Query Optimization
-
-
-
-Performance improvements using:
-
-
-
-\* Product-based indexing
-
-\* Time-based indexing
-
-\* EXPLAIN ANALYZE benchmarking
-
-\* Execution plan comparison
-
-
-
-\### Security Demonstration
-
-
-
-Role-based access control implementation:
-
-
-
-\* Regional Manager access
-
-\* National Manager access
-
-\* Controlled warehouse visibility
-
-
-
-\---
-
-
-
-\# 📸 Project Evidence
-
-
-
-\## dbt DAG
-
-
+# 📊 Data Quality Report
 
 Location:
 
+`docs/deliverables/data_quality/data_quality_report.csv`
 
+Checks executed:
 
-```text
+- transaction_id_not_null
+- customer_id_not_null
+- quantity_positive
+- price_positive
+- valid_products
 
-docs/screenshots/dbt\_dag.png
+Result: ✅ All checks passed
 
-```
+---
 
-
-
-\---
-
-
-
-\## Data Models
-
-
-
-\### Staging Model
-
-
-
-```text
-
-docs/screenshots/stg\_transactions\_model.png
-
-```
-
-
-
-\### Product Sales Model
-
-
-
-```text
-
-docs/screenshots/product\_sales\_model.png
-
-```
-
-
-
-\### Daily Sales Model
-
-
-
-```text
-
-docs/screenshots/daily\_sales\_model.png
-
-```
-
-
-
-\### Product Performance Model
-
-
-
-```text
-
-docs/screenshots/product\_performance\_model.png
-
-```
-
-
-
-\---
-
-
-
-\## Dashboard Screenshots
-
-
-
-\### Dashboard Overview
-
-
-
-```text
-
-docs/screenshots/dashboard\_overview.png
-
-```
-
-
-
-\### Product Analytics
-
-
-
-```text
-
-docs/screenshots/dashboard\_product\_analytics.png
-
-```
-
-
-
-\### Live Transaction Feed
-
-
-
-```text
-
-docs/screenshots/dashboard\_live\_feed.png
-
-```
-
-
-
-\---
-
-
-
-\## Query Optimization Evidence
-
-
-
-\### Product Query (Before Optimization)
-
-
-
-```text
-
-docs/screenshots/query\_optimization\_product\_before.png
-
-```
-
-
-
-\### Product Query (After Optimization)
-
-
-
-```text
-
-docs/screenshots/query\_optimization\_product\_after.png
-
-```
-
-
-
-\### Time-Based Query Optimization
-
-
-
-```text
-
-docs/screenshots/query\_optimization\_product\_time.png
-
-```
-
-
-
-\### Recent Transactions Query
-
-
-
-```text
-
-docs/screenshots/query\_optimization\_recent\_transactions.png
-
-```
-
-
-
-\### Revenue Aggregation Query
-
-
-
-```text
-
-docs/screenshots/query\_optimization\_revenue.png
-
-```
-
-
-
-\---
-
-
-
-\# 📂 Deliverables
-
-
-
-The following internship deliverables have been completed:
-
-
-
-| Deliverable                  | Status |
-
-| ---------------------------- | ------ |
-
-| Real-Time Streaming Pipeline | ✅      |
-
-| PostgreSQL Data Warehouse    | ✅      |
-
-| dbt Transformation Layer     | ✅      |
-
-| Data Quality Validation      | ✅      |
-
-| Query Optimization Report    | ✅      |
-
-| Security Demonstration       | ✅      |
-
-| Interactive Dashboard        | ✅      |
-
-| Project Documentation        | ✅      |
-
-
-
-\---
-
-
-
-\# 📊 Data Quality Report
-
-
+# ⚡ Query Optimization Report
 
 Location:
 
-
-
-```text
-
-docs/deliverables/data\_quality/data\_quality\_report.csv
-
-```
-
-
-
-Checks performed:
-
-
-
-\* transaction\_id\_not\_null
-
-\* customer\_id\_not\_null
-
-\* quantity\_positive
-
-\* price\_positive
-
-\* valid\_products
-
-
-
-\---
-
-
-
-\# ⚡ Performance Optimization Report
-
-
-
-Location:
-
-
-
-```text
-
-docs/deliverables/performance\_report/query\_optimization\_report.md
-
-```
-
-
+`docs/deliverables/performance_report/query_optimization_report.md`
 
 Includes:
 
+- Baseline query performance
+- Index creation
+- Execution plan analysis
+- Before vs After comparison
+- Performance improvement summary
 
+---
 
-\* Baseline query performance
-
-\* Index implementation
-
-\* Execution plan comparison
-
-\* Performance improvement analysis
-
-
-
-\---
-
-
-
-\# 🔒 Security Demonstration
-
-
+# 🔒 Security Demonstration
 
 Location:
 
-
-
-```text
-
-docs/deliverables/security\_demo/
-
-```
-
-
+`docs/deliverables/security_demo/`
 
 Includes:
 
+- Regional Manager access demonstration
+- National Manager access demonstration
+- Security validation report
 
+---
 
-\* Regional Manager access screenshots
+# ▶️ Running The Project
 
-\* National Manager access screenshots
-
-\* Security demonstration report
-
-
-
-\---
-
-
-
-\# ▶️ Running the Project
-
-
-
-\## 1. Start PostgreSQL
-
-
+## Start PostgreSQL
 
 ```bash
-
 docker start retail-postgres
-
 ```
 
-
-
-\## 2. Start Zookeeper
-
-
+## Start Zookeeper
 
 ```bash
-
 zookeeper-server-start.bat config/zookeeper.properties
-
 ```
 
-
-
-\## 3. Start Kafka
-
-
+## Start Kafka
 
 ```bash
-
 kafka-server-start.bat config/server.properties
-
 ```
 
-
-
-\## 4. Start Producer
-
-
+## Start Producer
 
 ```bash
-
 python producer/producer.py
-
 ```
 
-
-
-\## 5. Start Spark Consumer
-
-
+## Start Spark Consumer
 
 ```bash
-
-python spark\_jobs/stream\_consumer.py
-
+python spark_jobs/stream_consumer.py
 ```
 
-
-
-\## 6. Run dbt Models
-
-
+## Run dbt Models
 
 ```bash
-
 dbt run
-
 ```
 
-
-
-\## 7. Launch Dashboard
-
-
+## Launch Dashboard
 
 ```bash
-
-streamlit run streamlit\_app/app.py
-
+streamlit run streamlit_app/app.py
 ```
 
+---
 
-
-\---
-
-
-
-\# 📁 Repository Structure
-
-
+# 📁 Repository Structure
 
 ```text
-
-real\_time\_retail\_platform
-
+real_time_retail_platform
 │
-
-├── producer
-
-├── spark\_jobs
-
-├── streamlit\_app
-
-├── retail\_dbt
-
-├── quality\_checks
-
-├── docs
-
-│   ├── screenshots
-
-│   └── deliverables
-
+├── producer/
+├── spark_jobs/
+├── streamlit_app/
+├── retail_dbt/
+├── quality_checks/
+├── docs/
+│   ├── screenshots/
+│   └── deliverables/
+├── docker-compose.yml
 └── README.md
-
 ```
 
+---
 
+# 👨‍💻 Author
 
-\---
-
-
-
-\# 👨‍💻 Author
-
-
-
-\*\*Shabbir Rajgarh Wala\*\*
-
-
+**Shabbir Rajgarh Wala**
 
 Bachelor of Computer Applications (BCA)
 
-
-
-Shri Vaishnav Institute of Management \& Science (SVIMS), Indore
-
-
+Shri Vaishnav Institute of Management & Science (SVIMS), Indore
 
 Data Analytics Internship Project
 
-
-
 2026
 
+---
 
+## 📌 Internship Submission Note
 
+This repository contains all required deliverables including:
+
+- Working real-time data pipeline
+- dbt transformation models
+- Interactive analytics dashboard
+- Query optimization report
+- Data quality validation report
+- Security demonstration
+- Supporting screenshots and documentation
+
+All project components were successfully executed and verified locally.
