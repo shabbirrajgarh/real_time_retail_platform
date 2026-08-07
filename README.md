@@ -314,23 +314,32 @@ streamlit run streamlit_app/app.py
 
 ---
 
-# 📁 Repository Structure
+## 📁 Repository Structure
 
 ```text
 real_time_retail_platform
 │
-├── producer/
-├── spark_jobs/
-├── streamlit_app/
-├── retail_dbt/
-├── quality_checks/
 ├── docs/
 │   ├── screenshots/
 │   └── deliverables/
+│
+├── producer/
+├── spark_jobs/
+├── retail_dbt/
+├── streamlit_app/
+├── quality_checks/
+│
+├── scripts/
+├── superset/
+├── superset_config/
+│
 ├── docker-compose.yml
-└── README.md
+├── retail_backup.sql
+├── README.md
+├── ARCHITECTURE.md
+├── PROJECT_TRACKER.md
+└── REQUIREMENTS_MATRIX.md
 ```
-
 ---
 
 # 👨‍💻 Author
