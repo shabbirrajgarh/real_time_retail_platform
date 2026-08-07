@@ -139,14 +139,16 @@ Performance improvements achieved using:
 - Execution plan analysis
 - EXPLAIN ANALYZE benchmarking
 
-## Security Demonstration
+Security Demonstration:
 
-Role-based database access:
+Role-based access control was implemented at the PostgreSQL warehouse level.
 
-- Regional Manager
-- National Manager
+Regional Managers can access only regional data.
+National Managers can access all warehouse data.
 
----
+Screenshots demonstrating both roles are included in:
+
+docs/deliverables/security_demo/
 
 # 📸 Project Evidence
 
