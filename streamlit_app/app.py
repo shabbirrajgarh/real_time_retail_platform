@@ -16,34 +16,53 @@ st.set_page_config(
 )
 
 # ==================================
-# AUTO REFRESH EVERY 5 SECONDS
+# AUTO REFRESH
 # ==================================
 
-st_autorefresh(interval=5000, key="refresh")
-
-# ==================================
-# DATABASE
-# ==================================
-
-engine = create_engine(
-    "postgresql+psycopg2://retail_user:retail_password@localhost:5432/retail_dw"
+st_autorefresh(
+    interval=5000,
+    key="refresh"
 )
 
 # ==================================
-# LOAD ONLY RECENT DATA
+# DATABASE CONNECTION
 # ==================================
 
-query = """
-SELECT *
-FROM transactions
-ORDER BY transaction_time DESC
-LIMIT 1000
-"""
+@st.cache_resource
+def get_engine():
+    return create_engine(
+        "postgresql+psycopg2://retail_user:retail_password@localhost:5432/retail_dw"
+    )
 
-df = pd.read_sql(query, engine)
+engine = get_engine()
 
-df["transaction_time"] = pd.to_datetime(df["transaction_time"])
-df["revenue"] = df["quantity"] * df["price"]
+# ==================================
+# LOAD DATA
+# ==================================
+
+@st.cache_data(ttl=5)
+def load_data():
+    query = """
+    SELECT *
+    FROM transactions
+    ORDER BY transaction_time DESC
+    LIMIT 1000
+    """
+    return pd.read_sql(query, engine)
+
+df = load_data()
+
+# ==================================
+# PREPARE DATA
+# ==================================
+
+df["transaction_time"] = pd.to_datetime(
+    df["transaction_time"]
+)
+
+df["revenue"] = (
+    df["quantity"] * df["price"]
+)
 
 # ==================================
 # SIDEBAR
@@ -51,13 +70,19 @@ df["revenue"] = df["quantity"] * df["price"]
 
 st.sidebar.title("⚙ Dashboard Filters")
 
-selected_products = st.sidebar.multiselect(
-    "Products",
-    options=sorted(df["product"].unique()),
-    default=sorted(df["product"].unique())
+products = sorted(
+    df["product"].unique()
 )
 
-df = df[df["product"].isin(selected_products)]
+selected_products = st.sidebar.multiselect(
+    "Products",
+    options=products,
+    default=products
+)
+
+df = df[
+    df["product"].isin(selected_products)
+]
 
 # ==================================
 # HEADER
@@ -67,64 +92,124 @@ st.title("🛒 Retail Analytics Platform")
 
 st.markdown(
     """
-### Live Retail Analytics Dashboard
-Kafka • PostgreSQL • Spark • dbt • Streamlit
+### Real-Time Retail Data Platform
+
+Kafka Streaming • Spark Processing • PostgreSQL Warehouse • dbt Analytics • Streamlit BI
 """
 )
 
 st.caption(
-    f"Last Refresh: {datetime.now().strftime('%H:%M:%S')}"
+    f"Last Refresh: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 )
 
 # ==================================
-# KPIs
+# KPI CALCULATIONS
 # ==================================
 
 total_orders = len(df)
-total_quantity = int(df["quantity"].sum())
-total_revenue = float(df["revenue"].sum())
-latest_time = df["transaction_time"].max()
 
-k1, k2, k3, k4 = st.columns(4)
-
-k1.metric(
-    "Orders",
-    f"{total_orders:,}"
+total_quantity = int(
+    df["quantity"].sum()
 )
 
-k2.metric(
-    "Quantity",
-    f"{total_quantity:,}"
+total_revenue = float(
+    df["revenue"].sum()
 )
 
-k3.metric(
-    "Revenue",
-    f"₹{total_revenue:,.0f}"
+avg_order_value = (
+    total_revenue / total_orders
+    if total_orders > 0
+    else 0
 )
 
-k4.metric(
-    "Latest Event",
-    latest_time.strftime("%H:%M:%S")
-)
-
-st.divider()
-
-# ==================================
-# PRODUCT CHARTS
-# ==================================
+latest_time = df[
+    "transaction_time"
+].max()
 
 summary = (
     df.groupby("product")
     .agg(
         Quantity=("quantity", "sum"),
-        Revenue=("revenue", "sum")
+        Revenue=("revenue", "sum"),
+        Transactions=("product", "count")
     )
     .reset_index()
 )
 
-c1, c2 = st.columns(2)
+top_product = summary.sort_values(
+    "Revenue",
+    ascending=False
+).iloc[0]["product"]
 
-with c1:
+# ==================================
+# KPI ROW 1
+# ==================================
+
+k1, k2, k3 = st.columns(3)
+
+with k1:
+    st.metric(
+        "📦 Orders",
+        f"{total_orders:,}"
+    )
+
+with k2:
+    st.metric(
+        "💰 Revenue",
+        f"₹{total_revenue:,.0f}"
+    )
+
+with k3:
+    st.metric(
+        "🛒 Avg Order Value",
+        f"₹{avg_order_value:,.0f}"
+    )
+
+# ==================================
+# KPI ROW 2
+# ==================================
+
+k4, k5, k6 = st.columns(3)
+
+with k4:
+    st.metric(
+        "📊 Quantity Sold",
+        f"{total_quantity:,}"
+    )
+
+with k5:
+    st.metric(
+        "🏆 Top Product",
+        top_product
+    )
+
+with k6:
+    st.metric(
+        "⏱ Latest Event",
+        latest_time.strftime("%H:%M:%S")
+    )
+
+# ==================================
+# SYSTEM STATUS
+# ==================================
+
+st.success(
+    "🟢 Kafka Producer Active | "
+    "🟢 Spark Consumer Active | "
+    "🟢 PostgreSQL Connected | "
+    "🟢 dbt Models Refreshing"
+)
+
+st.divider()
+
+# ==================================
+# PRODUCT ANALYTICS
+# ==================================
+
+col1, col2 = st.columns(2)
+
+with col1:
+
     fig_qty = px.bar(
         summary,
         x="product",
@@ -137,7 +222,8 @@ with c1:
         use_container_width=True
     )
 
-with c2:
+with col2:
+
     fig_rev = px.bar(
         summary,
         x="product",
@@ -150,10 +236,26 @@ with c2:
         use_container_width=True
     )
 
+# ==================================
+# REVENUE SHARE
+# ==================================
+
+fig_pie = px.pie(
+    summary,
+    names="product",
+    values="Revenue",
+    title="Revenue Share by Product"
+)
+
+st.plotly_chart(
+    fig_pie,
+    use_container_width=True
+)
+
 st.divider()
 
 # ==================================
-# SALES TREND
+# REVENUE TREND
 # ==================================
 
 trend = (
@@ -184,20 +286,27 @@ st.plotly_chart(
 st.divider()
 
 # ==================================
-# TOP PRODUCTS
+# PRODUCT PERFORMANCE TABLE
 # ==================================
 
-st.subheader("🏆 Top Products")
+st.subheader("🏆 Product Performance")
 
-top_products = summary.sort_values(
-    "Revenue",
-    ascending=False
-)
+performance = summary.copy()
+
+performance["Average Revenue"] = (
+    performance["Revenue"]
+    / performance["Transactions"]
+).round(2)
 
 st.dataframe(
-    top_products,
+    performance.sort_values(
+        "Revenue",
+        ascending=False
+    ),
     use_container_width=True
 )
+
+st.divider()
 
 # ==================================
 # LIVE TRANSACTION FEED
@@ -219,9 +328,9 @@ latest_transactions = df[
 st.dataframe(
     latest_transactions,
     use_container_width=True,
-    height=400
+    height=450
 )
 
 st.caption(
-    "Auto refreshes every 5 seconds"
+    "Dashboard refreshes automatically every 5 seconds."
 )

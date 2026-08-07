@@ -1,0 +1,6 @@
+check,passed
+transaction_id_not_null,True
+customer_id_not_null,True
+quantity_positive,True
+price_positive,True
+valid_products,True
